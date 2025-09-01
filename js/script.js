@@ -161,7 +161,7 @@ window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroContent = document.querySelector('.hero-content');
     if (heroContent && scrolled < window.innerHeight) {
-        heroContent.style.transform = `translateY(${scrolled * 0.2}px)`;
+        heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
     }
 });
 
