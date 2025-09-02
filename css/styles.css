@@ -11,13 +11,15 @@
     --secondary-color: #ffffff;
     --accent-color: #10b981;
     --text-primary: #f0f0f0;
-    --text-secondary: #b6b8bd;
-    --background: #6200b3;
+    --text-secondary: #cecece;
+    --text-terciary: #ffb71c;
+    --background: #0a0a0a;
     --background-alt: #000000;
     --border-color: #000000;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --gradient2: linear-gradient(135deg, #f19063 0%, #f6cd5c 100%);
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -156,7 +158,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.5rem;
-    color: var(--text-secondary);
+    color: var(--text-terciary);
     margin-bottom: 1.5rem;
 }
 
@@ -402,7 +404,7 @@ body {
 
 .skill-progress {
     height: 100%;
-    background: var(--gradient);
+    background: var(--gradient2);
     border-radius: 4px;
     transition: width 1.5s ease;
 }
@@ -420,7 +422,7 @@ body {
 }
 
 .project-card {
-    background: rgb(0, 0, 0);
+    background: var(--gradient);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -454,7 +456,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(99, 102, 241, 0.9);
+    background: var(--gradient);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -479,7 +481,7 @@ body {
     height: 50px;
     background: rgb(26, 25, 25);
     border-radius: 50%;
-    color: var(--primary-color);
+    color: var(--gradient2);
     text-decoration: none;
     font-size: 1.25rem;
     transition: all 0.3s ease;
@@ -488,7 +490,7 @@ body {
 .project-link:hover {
     transform: scale(1.1);
     background: var(--primary-color);
-    color: rgb(29, 29, 29);
+    color: rgb(231, 184, 30);
 }
 
 .project-content {
@@ -515,7 +517,7 @@ body {
 
 .tech-tag {
     background: var(--background-alt);
-    color: var(--primary-color);
+    color: var(--gradient2);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -564,7 +566,7 @@ body {
     width: 50px;
     height: 50px;
     background: var(--gradient);
-    color: rgb(0, 0, 0);
+    color: rgb(255, 199, 43);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -583,7 +585,7 @@ body {
 }
 
 .contact-form {
-    background: rgb(24, 0, 63);
+    background: rgb(43, 43, 43);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow);
@@ -609,7 +611,7 @@ body {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
+    border-color: var(--gradient2);
 }
 
 .form-group label {
