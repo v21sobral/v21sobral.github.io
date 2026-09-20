@@ -7,10 +7,9 @@
     const themeBtn = $('#theme-toggle');
     const pageSections = $$('main section, .footer');
     const scrollProgress = $('#scroll-progress');
-    let lightTheme = false;
-    try { lightTheme = localStorage.getItem('theme') === 'light'; } catch (err) { /* sem armazenamento */ }
+    let lightTheme = true;
 
-    const setTheme = (light, save = false) => {
+    const setTheme = (light) => {
         lightTheme = light;
         document.documentElement.dataset.theme = light ? 'light' : 'dark';
         if (themeBtn) {
@@ -18,9 +17,6 @@
             themeBtn.setAttribute('aria-pressed', String(light));
             themeBtn.setAttribute('aria-label', light ? 'Ativar modo escuro' : 'Ativar modo claro');
             themeBtn.title = light ? 'Ativar modo escuro' : 'Ativar modo claro';
-        }
-        if (save) {
-            try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (err) { /* sem armazenamento */ }
         }
     };
 
@@ -266,7 +262,7 @@
     setRain(rainEnabled);
     if (themeBtn) themeBtn.addEventListener('click', () => {
         const nextLightTheme = !lightTheme;
-        setTheme(nextLightTheme, true);
+        setTheme(nextLightTheme);
         setRain(!nextLightTheme);
     });
 

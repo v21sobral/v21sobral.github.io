@@ -617,15 +617,16 @@ html[data-theme="light"] .tok-str { color: #8f3d24; }
 .social-links a:hover { background: rgba(0, 255, 65, 0.1); box-shadow: 0 0 16px rgba(0, 255, 65, 0.3); transform: translateY(-2px); }
 
 /* Retrato em verde fósforo: ao passar o cursor, a foto ganha cor */
-.portrait-wrap { justify-self: center; width: min(100%, 340px); }
+.portrait-wrap { justify-self: center; width: min(100%, 220px); }
 
 .portrait {
     position: relative;
-    aspect-ratio: 4 / 5;
-    border: 1px solid var(--line-strong);
-    border-radius: 8px;
+    aspect-ratio: 1;
+    border: 3px solid var(--line-strong);
+    border-radius: 50%;
     overflow: hidden;
     background: #000;
+    box-shadow: 0 0 0 7px var(--bg), 0 0 0 9px var(--line-strong), var(--glow);
 }
 .portrait img {
     width: 100%;
