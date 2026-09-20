@@ -3,351 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Sobral - Desenvolvedor Full Stack</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Victor Sobral | Desenvolvedor Full Stack</title>
+    <meta name="description" content="Portfólio de Victor Sobral, estudante de Análise e Desenvolvimento de Sistemas em Salvador, BA. Projetos web com React, Node.js, Python e PostgreSQL.">
+    <meta name="theme-color" content="#010402">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Victor Sobral | Desenvolvedor Full Stack">
+    <meta property="og:description" content="Projetos web, habilidades e contato de Victor Sobral.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23010402'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' font-family='monospace' font-weight='700' fill='%2300ff41'%3E%3E_%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header/Navigation -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <h2>&lt;Portfólio/&gt;</h2>
-            </div>
+    <a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+    <!-- Chuva de código (fundo) -->
+    <canvas id="rain" aria-hidden="true"></canvas>
+
+    <!-- Cabeçalho -->
+    <header class="header" id="header">
+        <nav class="nav wrap" aria-label="Navegação principal">
+            <a href="#home" class="brand">
+                <span class="brand-prompt" aria-hidden="true">&gt;_</span>
+                <span>victor.sobral</span>
+            </a>
+
             <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">Sobre</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">Habilidades</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projetos</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contato</a>
-                </li>
+                <li><a href="#projects" class="nav-link">Projetos</a></li>
+                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#skills" class="nav-link">Habilidades</a></li>
+                <li><a href="#contact" class="nav-link">Contato</a></li>
             </ul>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+
+            <div class="nav-tools">
+                <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-pressed="false"
+                        aria-label="Ativar modo claro" title="Ativar modo claro">
+                    <span class="pill" aria-hidden="true"></span>
+                </button>
+                <button class="icon-btn nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    Olá, eu sou Victor Sobral
-                </h1>
-                <h2 class="hero-subtitle">Estudante de Análise e Desenvolvimento de Sistemas</h2>
-                <p class="hero-description">
-                    Apaixonado por criar soluções digitais inovadoras e experiências de usuário excepcionais. 
-                    Especializado em desenvolvimento web moderno com foco em performance e usabilidade.
+    <main id="main">
+        <!-- Início -->
+        <section id="home" class="hero">
+            <div class="wrap hero-grid">
+                <div class="hero-text">
+                    <h1 class="hero-name" id="hero-name"><span>Victor</span> <span>Sobral</span></h1>
+                    <p class="hero-role">Estudante de Análise e Desenvolvimento de Sistemas</p>
+                    <p class="hero-copy">
+                        Crio soluções digitais e interfaces que funcionam bem em qualquer tela.
+                        Trabalho com desenvolvimento web moderno, com foco em desempenho e usabilidade.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">Ver projetos</a>
+                        <a href="#contact" class="btn btn-ghost">Entrar em contato</a>
+                    </div>
+                </div>
+
+                <div class="hero-art">
+                    <div class="term">
+                        <div class="term-bar">
+                            <div class="term-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+                            <span class="term-title">welcome.js</span>
+                        </div>
+                        <pre class="term-body"><code id="hero-code"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projetos -->
+        <section id="projects" class="section">
+            <div class="wrap">
+                <header class="section-head">
+                    <h2 class="section-title"><span class="prompt" aria-hidden="true">~/</span>projetos</h2>
+                    <p class="section-lead">Escolha um projeto para ver os detalhes. Os que estão no ar têm prévia ao vivo.</p>
+                </header>
+
+                <div class="stage">
+                    <ul class="project-list" id="project-list" role="tablist" aria-label="Lista de projetos"></ul>
+                    <div class="viewer" id="viewer" role="tabpanel" aria-live="polite"></div>
+                </div>
+
+                <noscript>
+                    <p class="section-lead">Ative o JavaScript para ver os projetos, ou visite
+                        <a href="https://github.com/v21sobral">github.com/v21sobral</a>.</p>
+                </noscript>
+
+                <p class="projects-more">
+                    Quer ver mais? Todos os repositórios estão no
+                    <a href="https://github.com/v21sobral" target="_blank" rel="noopener noreferrer">meu GitHub</a>.
                 </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">Ver Projetos</a>
-                    <a href="#contact" class="btn btn-secondary">Entre em Contato</a>
-                </div>
             </div>
-            <div class="hero-image">
-                <div class="code-block">
-                    <div class="code-header">
-                        <div class="code-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <span class="code-title">welcome.js</span>
-                    </div>
-                    <div class="code-content">
-                        <pre><code><span class="keyword">const</span> <span class="variable">developer</span> = {
-  <span class="property">name</span>: <span class="string">'Victor Sobral'</span>,
-  <span class="property">skills</span>: [<span class="string">'JavaScript'</span>, <span class="string">'React'</span>, <span class="string">'Python'</span>],
-  <span class="property">passion</span>: <span class="string">'Criar código limpo'</span>,
-  <span class="property">status</span>: <span class="string">'Disponível para novos projetos'</span>
-};</code></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">Sobre Mim</h2>
-            <div class="about-content">
+        <!-- Sobre -->
+        <section id="about" class="section">
+            <div class="wrap about-grid">
                 <div class="about-text">
+                    <h2 class="section-title"><span class="prompt" aria-hidden="true">~/</span>sobre</h2>
                     <p>
-                        Sou um desenvolvedor full stack com mais de 3 anos de experiência criando 
-                        aplicações web modernas e responsivas. Minha paixão pela programação começou 
-                        na universidade e desde então venho me especializando em tecnologias como 
-                        React, Node.js, Python e banco de dados.
+                        Sou desenvolvedor full stack com mais de 3 anos de experiência criando
+                        aplicações web modernas e responsivas. Minha paixão pela programação começou
+                        na universidade e, desde então, venho me especializando em React, Node.js,
+                        Python e bancos de dados.
                     </p>
                     <p>
-                        Acredito que bom código não é apenas funcional, mas também limpo, eficiente 
-                        e bem documentado. Estou sempre em busca de novos desafios e oportunidades 
-                        para aprender e crescer profissionalmente.
+                        Acredito que um bom código não é só funcional: também é limpo, eficiente
+                        e bem documentado. Estou sempre em busca de novos desafios e de
+                        oportunidades para aprender e crescer profissionalmente.
                     </p>
+                    <div class="social-links">
+                        <a href="https://github.com/v21sobral" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/victor-sobral-82109b52/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://web.facebook.com/21sobral" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
                 </div>
-                <div class="about-image">
-                    <div class="profile-card">
-                        <div class="profile-avatar">
-                            <img src="images/victortrue.png" alt="Foto de Victor Sobral" width="100" height="100">
-                        </div>
-                        <h3>Victor Sobral</h3>
-                        <p>Estudante de Análise e Desenvolvimento de Sistemas</p>
-                        <div class="social-links">
-                            <a href="https://github.com/v21sobral"><i class="fab fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/victor-sobral-82109b52/"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://web.facebook.com/21sobral"><i class="fab fa-facebook"></i></a>
-                        </div>
+
+                <figure class="portrait-wrap">
+                    <div class="portrait">
+                        <img src="images/victortrue.png" alt="Foto de Victor Sobral" width="340" height="425" loading="lazy"
+                             onerror="this.parentElement.classList.add('no-photo')">
+                    </div>
+                    <figcaption>Passe o cursor para tomar a pílula vermelha.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Habilidades -->
+        <section id="skills" class="section">
+            <div class="wrap">
+                <header class="section-head">
+                    <h2 class="section-title"><span class="prompt" aria-hidden="true">~/</span>habilidades</h2>
+                    <p class="section-lead">As tecnologias que uso nos meus projetos.</p>
+                </header>
+
+                <div class="skill-rows">
+                    <div class="skill-row">
+                        <h3>Frontend</h3>
+                        <ul>
+                            <li>JavaScript</li>
+                            <li>React</li>
+                            <li>HTML e CSS</li>
+                            <li>Tailwind</li>
+                        </ul>
+                    </div>
+                    <div class="skill-row">
+                        <h3>Backend</h3>
+                        <ul>
+                            <li>Python</li>
+                            <li>Node.js</li>
+                            <li>Java</li>
+                            <li>Spring Boot</li>
+                        </ul>
+                    </div>
+                    <div class="skill-row">
+                        <h3>Bancos de dados</h3>
+                        <ul>
+                            <li>PostgreSQL</li>
+                            <li>MySQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-row">
+                        <h3>Ferramentas</h3>
+                        <ul>
+                            <li>Git e GitHub</li>
+                            <li>Docker</li>
+                            <li>Figma</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Habilidades Técnicas</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Frontend</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <span class="skill-name">JavaScript</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 50%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">React.js</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 65%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">HTML/CSS</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-server"></i>Backend</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <span class="skill-name">JavaScript</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 45%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Node.js</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 25%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">PostgreSQL</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 55%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Ferramentas</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <span class="skill-name">Git/GitHub</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 70%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Docker</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 55%"></div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Figma</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 65%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Meus Projetos</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <div class="project-placeholder">
-                            <i class="fas fa-project-diagram"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Projeto Migrations</h3>
-                        <p>Aplicativo para migrantes que chegam a cidades sem conhecer ninguém ou perspectiva profissional.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <div class="project-placeholder">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Calculadora em Python</h3>
-                        <p>Aplicação de calculadora simples para cálculos.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <div class="project-placeholder">
-                            <i class="fas fa-tasks"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Criafor de lista para compras</h3>
-                        <p>Aplicativo para criação e gerenciamento de listas de compras.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">React</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Vamos Trabalhar Juntos</h2>
-            <div class="contact-content">
+        <!-- Contato -->
+        <section id="contact" class="section">
+            <div class="wrap contact-grid">
                 <div class="contact-info">
-                    <h3>Entre em Contato</h3>
-                    <p>Estou sempre interessado em novos projetos e oportunidades. Vamos conversar sobre como posso ajudar a transformar suas ideias em realidade!</p>
-                    
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>v21sobral@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Telefone</h4>
-                                <p>+55 (71) 99925-6177</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Localização</h4>
-                                <p>Salvador, BA - Brasil</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="section-title"><span class="prompt" aria-hidden="true">~/</span>contato</h2>
+                    <p class="section-lead">
+                        Estou sempre aberto a novos projetos e oportunidades.
+                        Conte sua ideia e vamos ver como tirá-la do papel.
+                    </p>
+
+                    <a class="contact-email" href="mailto:v21sobral@gmail.com">v21sobral@gmail.com</a>
+
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                            <a href="https://wa.me/5571999256177" target="_blank" rel="noopener noreferrer">+55 (71) 99925-6177</a>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <span>Salvador, BA - Brasil</span>
+                        </li>
+                    </ul>
                 </div>
 
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Seu Nome" required>
+                <form class="contact-form" id="contact-form" novalidate>
+                    <div class="field">
                         <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" autocomplete="name" required>
                     </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Seu Email" required>
-                        <label for="email">Email</label>
+                    <div class="field">
+                        <label for="email">Seu e-mail</label>
+                        <input type="email" id="email" name="email" autocomplete="email" required>
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="subject" name="subject" placeholder="Assunto" required>
+                    <div class="field">
                         <label for="subject">Assunto</label>
+                        <input type="text" id="subject" name="subject" required>
                     </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" rows="5" placeholder="Sua Mensagem" required></textarea>
+                    <div class="field">
                         <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    <button type="submit" class="btn btn-primary">Abrir no meu e-mail</button>
+                    <p class="form-status" id="form-status" role="status"></p>
                 </form>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>&copy; 2025 Victor Sobral. Todos os direitos reservados.</p>
-                </div>
-                <div class="footer-socials">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
+        <div class="wrap footer-content">
+            <p>&copy; <span id="year">2025</span> Victor Sobral. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="#home">Voltar ao topo</a>
+                <a href="https://github.com/v21sobral" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/victor-sobral-82109b52/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
