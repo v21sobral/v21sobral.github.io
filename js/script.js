@@ -5,6 +5,8 @@
     const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const themeBtn = $('#theme-toggle');
+    const pageSections = $$('main section, .footer');
+    const scrollProgress = $('#scroll-progress');
     let lightTheme = false;
     try { lightTheme = localStorage.getItem('theme') === 'light'; } catch (err) { /* sem armazenamento */ }
 
@@ -23,6 +25,44 @@
     };
 
     setTheme(lightTheme);
+
+    if (!reduceMotion) {
+        document.addEventListener('pointermove', (event) => {
+            document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
+            document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
+            document.body.classList.add('pointer-active');
+        }, { passive: true });
+    }
+
+    pageSections.forEach((section) => section.classList.add('reveal-ready'));
+
+    const updateScrollProgress = () => {
+        if (!scrollProgress) return;
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+        scrollProgress.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+    };
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+        document.addEventListener('pointermove', (event) => {
+            const panel = event.target.closest('.term, .browser');
+            if (!panel) return;
+            const bounds = panel.getBoundingClientRect();
+            const rotateX = ((event.clientY - bounds.top) / bounds.height - 0.5) * -5;
+            const rotateY = ((event.clientX - bounds.left) / bounds.width - 0.5) * 5;
+            panel.style.setProperty('--tilt-x', `${rotateX}deg`);
+            panel.style.setProperty('--tilt-y', `${rotateY}deg`);
+        }, { passive: true });
+        document.addEventListener('pointerout', (event) => {
+            const panel = event.target.closest('.term, .browser');
+            if (panel && !panel.contains(event.relatedTarget)) {
+                panel.style.setProperty('--tilt-x', '0deg');
+                panel.style.setProperty('--tilt-y', '0deg');
+            }
+        }, { passive: true });
+    }
 
     const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
         { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
@@ -442,6 +482,7 @@
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
             navLinks.forEach((l) => {
                 const active = l.getAttribute('href') === `#${entry.target.id}`;
                 l.classList.toggle('active', active);
@@ -451,6 +492,15 @@
         });
     }, { rootMargin: '-45% 0px -50% 0px' });
     $$('main section[id]').forEach((s) => sectionObserver.observe(s));
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.12 });
+    pageSections.forEach((section) => revealObserver.observe(section));
 
     /* =====================================================
        FORMULÁRIO DE CONTATO
